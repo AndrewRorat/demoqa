@@ -1,1 +1,1 @@
-"# Cucumber testing demoqa" 
+# Cucumber testing demoqa
