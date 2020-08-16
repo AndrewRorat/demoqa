@@ -1,6 +1,5 @@
 package stepsDefinition;
 
-import data.UserRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
-import pojo.User;
 import webPages.HomePage;
 import webPages.tabs.TextBoxPage;
 
@@ -37,22 +35,23 @@ public class TextBoxDefinition {
                 .goToElementsPage()
                 .clickTextBoxButton();
     }
-    @And("I input correct first name")
-    public void iInputCorrectFirstName() {
+
+    @And("I input name {string}")
+    public void iInputName(String name) {
         textBoxPage
-        .inputIntoFullNameTextField(UserRepository.getMark().getFirstName());
+                .inputIntoFullNameTextField(name);
     }
 
-    @And("I input correct email address")
-    public void iInputCorrectEmailAddress() {
+    @And("I input email address {string}")
+    public void iInputEmailAddress(String emailAddress) {
         textBoxPage
-                .inputIntoEmailTextField(UserRepository.getMark().getEmailAddress());
+                .inputIntoEmailTextField(emailAddress);
     }
 
-    @And("I input current address")
-    public void iInputCurrentAddress() {
+    @And("I input current address {string}")
+    public void iInputCurrentAddress(String currentAddress) {
         textBoxPage
-                .inputIntoCurrentAddressTextField(UserRepository.getMark().getDepartment());
+                .inputIntoCurrentAddressTextField(currentAddress);
     }
 
     @And("I click Submit button")
@@ -61,14 +60,18 @@ public class TextBoxDefinition {
                 .clickSubmitButton();
     }
 
-    @Then("^I see \"([^\"]*)\" output information under the registration form$")
-    public void iSeeOutputInformationUnderTheRegistrationForm(String arg0) {
+    @Then("I see {string}, {string} in output information under the registration form")
+    public void iSeeInOutputInformationUnderTheRegistrationForm(String name, String emailAddress) {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(textBoxPage.getOutputName().contains(UserRepository.getMark().getFirstName()));
-        softAssert.assertTrue(textBoxPage.getOutputName().contains(UserRepository.getMark().getEmailAddress()));
+
+        softAssert.assertTrue(textBoxPage.getOutputName().contains(name),
+                String.format("Full Name field contains: %s but you need %s",
+                        textBoxPage.getOutputName(), name));
+
+        softAssert.assertTrue(textBoxPage.getOutputEmail().contains(emailAddress),
+                String.format("Email Address field contains: %s but you need %s",
+                        textBoxPage.getOutputEmail(), emailAddress));
+
         softAssert.assertAll();
     }
-
-
-
 }
