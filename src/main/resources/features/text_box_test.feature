@@ -3,7 +3,7 @@ Feature: I want to test Text box page;
   Background: User navigates to DemoQA homePage
     Given I am on the home page on URL "https://www.demoqa.com/"
 
-  Scenario: Register user with
+  Scenario: Register user
     When I go to the Text box page
     And I input name "Mark"
     And I input email address "markus@gmail.com"
