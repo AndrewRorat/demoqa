@@ -51,7 +51,7 @@ public class CheckBoxPage extends LeftTabsPanel {
     }
 
     public String getSelectedText() {
-        List selectedText = this.selectedText.stream().map(i -> i.getText()).collect(Collectors.toList());
+        List selectedText = this.selectedText.stream().map(WebElement::getText).collect(Collectors.toList());
         return selectedText.toString();
     }
 }

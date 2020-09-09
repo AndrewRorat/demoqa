@@ -5,8 +5,8 @@ Feature: I want to test Text box page;
 
   Scenario: Register user
     When I go to the Text box page
-    And I input name "Mark"
-    And I input email address "markus@gmail.com"
-    And I input current address "lviv"
-    And I click Submit button
+    * I input name "Mark"
+    * I input email address "markus@gmail.com"
+    * I input current address "lviv"
+    * I click Submit button
     Then I see "Mark", "markus@gmail.com" in output information under the registration form
